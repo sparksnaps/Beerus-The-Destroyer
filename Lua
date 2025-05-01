@@ -1,4 +1,651 @@
+local animationId = 12983333733 ---3 ult
 
+local player = game.Players.LocalPlayer
+
+local character = player.Character or player.CharacterAdded:Wait()
+
+local humanoid = character:WaitForChild("Humanoid")
+
+local function onAnimationPlayed(animationTrack)
+
+    if animationTrack.Animation.AnimationId == "rbxassetid://" .. animationId then
+
+        local p = game.Players.LocalPlayer
+
+        local Humanoid = p.Character:WaitForChild("Humanoid")
+
+        for _, animTrack in pairs(Humanoid:GetPlayingAnimationTracks()) do
+            animTrack:Stop()
+        end
+
+        local AnimAnim = Instance.new("Animation")
+        AnimAnim.AnimationId = "rbxassetid://15962443652"
+        local Anim = Humanoid:LoadAnimation(AnimAnim)
+
+        local startTime = 0
+
+        Anim:Play()
+        Anim:AdjustSpeed(0)
+        Anim.TimePosition = startTime
+        Anim:AdjustSpeed(1)
+
+        -- Clone and apply particle effects to Right Arm
+        local Test = game.ReplicatedStorage.Resources.LastBreath.Arm.Arm.Attachment
+        local test = Test:Clone()
+        test.Parent = game.Players.LocalPlayer.Character:WaitForChild("Right Arm")
+
+        for _, child in ipairs(test:GetChildren()) do
+            if child:IsA("ParticleEmitter") then
+                child.Color = ColorSequence.new(Color3.fromRGB(128, 0, 128)) -- Set color to purple
+                child:Emit(5)
+                child.Enabled = true
+            end
+        end
+        
+        task.wait(0)
+        
+        -- Reset camera settings
+        Players = game:GetService("Players")
+        local speaker = Players.LocalPlayer
+        workspace.CurrentCamera:remove()
+        wait(.1)
+        workspace.CurrentCamera.CameraSubject = speaker.Character:FindFirstChildWhichIsA('Humanoid')
+        workspace.CurrentCamera.CameraType = "Custom"
+        speaker.CameraMinZoomDistance = 0.5
+        speaker.CameraMaxZoomDistance = 400
+        speaker.CameraMode = "Classic"
+        speaker.Character.Head.Anchored = false
+        
+        task.wait(0)
+
+        -- Coroutine for humanoid rotation
+        local humanoid = player.Character.Humanoid
+        local s = tick()
+        coroutine.wrap(function()
+            while tick() - s < 5 do
+                humanoid.AutoRotate = true
+                wait(0)
+            end
+        end)()
+
+        -- Play sound effect
+        local function GetGitSound(GithubSnd, SoundName)
+            local url = GithubSnd
+            if not isfile(SoundName..".mp3") then
+                writefile(SoundName..".mp3", game:HttpGet(url))
+            end
+            local sound = Instance.new("Sound")
+            sound.SoundId = (getcustomasset or getsynasset)(SoundName..".mp3")
+            return sound
+        end
+
+        local Clock = GetGitSound("https://github.com/Kenjihin69/Kenjihin69/blob/main/lv_0_20250123153409.mp3?raw=true", "shinji this bomb")
+        Clock.Parent = workspace
+        Clock.Volume = 6
+        Clock.TimePosition = 0
+        Clock:Play()
+
+        task.wait(0)
+
+        -- Floating effect
+        local startTime = tick()  -- Get the current time in seconds
+        local duration = 0.4  -- Duration in sec
+
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+
+        local floatSpeed = 3 -- Adjust speed 
+        local duration = 1.6 -- Duration in sec
+
+        local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+        if humanoidRootPart then
+            local startTime = tick()
+            while tick() - startTime < duration do
+                wait(0.01) -- Controls how the loop runs
+                humanoidRootPart.CFrame = humanoidRootPart.CFrame + humanoidRootPart.CFrame.LookVector * floatSpeed * 0.1
+            end
+        end
+
+        task.wait(0)
+        test:Destroy()
+        task.wait(0)
+
+        -- Second animation
+        local AnimAnim2 = Instance.new("Animation")
+        AnimAnim2.AnimationId = "rbxassetid://18897115785"
+        local Anim2 = Humanoid:LoadAnimation(AnimAnim2)
+
+        local startTime = 0
+
+        Anim:Stop()
+        Anim2:Play()
+        Anim2:AdjustSpeed(0)
+        Anim2.TimePosition = startTime
+        Anim2:AdjustSpeed(1)
+
+        -- Clone and apply particle effects for dash3
+        local Test = game:GetService("ReplicatedStorage").Resources.Fang.OneInch2.dash3.VFX
+        local test = Test:Clone()
+        test.Parent = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart")
+
+        for _, child in ipairs(test:GetChildren()) do
+            if child:IsA("ParticleEmitter") then
+                child:Emit(1)
+                child.Color = ColorSequence.new(Color3.fromRGB(128, 0, 128)) -- Set color to purple
+                child.Enabled = true
+            end
+        end
+
+        task.wait(0)
+
+        -- Floating effect again
+        local startTime = tick()
+        local duration = 2  -- Duration in sec
+
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+
+        local floatSpeed = 100 -- Adjust speed 
+        local duration = 3 -- Duration in sec
+
+        local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+        if humanoidRootPart then
+            local startTime = tick()
+            while tick() - startTime < duration do
+                wait(0.01) -- Controls how the loop runs
+                humanoidRootPart.CFrame = humanoidRootPart.CFrame + humanoidRootPart.CFrame.LookVector * floatSpeed * 0.1
+            end
+        end
+
+        task.wait(0)
+        Anim2:Stop()
+        task.wait(0)
+        test:Destroy()
+        task.wait(0)
+
+        -- Third animation
+        local AnimAnim2 = Instance.new("Animation")
+        AnimAnim2.AnimationId = "rbxassetid://140164642047188"
+        local Anim2 = Humanoid:LoadAnimation(AnimAnim2)
+
+        local startTime = 6.8
+
+        Anim:Stop()
+        Anim2:Play()
+        Anim2:AdjustSpeed(0)
+        Anim2.TimePosition = startTime
+        Anim2:AdjustSpeed(1.2)
+
+        -- Clone and apply purple particle effects
+        local Test = game.ReplicatedStorage.Emotes.DemonParticles.RootAttachment
+        local test = Test:Clone()
+        test.Parent = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart")
+        test.CFrame = test.CFrame * CFrame.new(0, 0, -4)
+
+        for _, child in ipairs(test:GetChildren()) do
+            if child:IsA("ParticleEmitter") then
+                child.Color = ColorSequence.new(Color3.fromRGB(128, 0, 128)) -- Set color to purple
+                child:Emit(1)
+            end
+        end
+
+        task.wait(0)
+
+        -- Clone and apply FuneralEffect
+        local Test = game:GetService("ReplicatedStorage").Resources.FuneralEffect.Center
+        local test = Test:Clone()
+        test.Parent = game.Players.LocalPlayer.Character["Right Arm"]
+
+        for _, child in ipairs(test:GetChildren()) do
+            if child:IsA("ParticleEmitter") then
+                child:Emit(15)
+                child.Enabled = true
+            end
+        end
+
+        task.wait(1)
+        test:Destroy()
+        task.wait(0)
+
+        -- Stop sound effect
+        Clock:Stop()
+
+    end
+end
+
+humanoid.AnimationPlayed:Connect(onAnimationPlayed)
+
+local animationId = 11343318134 ---ult 1
+
+local player = game.Players.LocalPlayer
+
+local character = player.Character or player.CharacterAdded:Wait()
+
+local humanoid = character:WaitForChild("Humanoid")
+
+
+local function onAnimationPlayed(animationTrack)
+
+    if animationTrack.Animation.AnimationId == "rbxassetid://" .. animationId then
+
+        local p = game.Players.LocalPlayer
+        local Humanoid = p.Character:WaitForChild("Humanoid")
+
+
+        for _, animTrack in pairs(Humanoid:GetPlayingAnimationTracks()) do
+            animTrack:Stop()
+        end
+
+
+        local AnimAnim = Instance.new("Animation")
+
+        AnimAnim.AnimationId = "rbxassetid://76530443909428"
+
+        local Anim = Humanoid:LoadAnimation(AnimAnim)
+
+
+        local startTime = 0
+
+        Anim:Play()
+
+        Anim:AdjustSpeed(0)
+
+        Anim.TimePosition = startTime
+
+        Anim:AdjustSpeed(0.7)
+
+        -- Clone and apply particle effects to HumanoidRootPart
+        local Test = game.ReplicatedStorage.Emotes.DemonParticles.RootAttachment
+        local test = Test:Clone()
+        test.Parent = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart")
+
+        for _, child in ipairs(test:GetChildren()) do
+            if child:IsA("ParticleEmitter") then
+                child.Color = ColorSequence.new(Color3.fromRGB(128, 0, 128)) -- Set color to purple
+                child:Emit(1)
+            end
+        end
+        task.wait(5.5)
+        
+        Players = game:GetService("Players")
+        local speaker = Players.LocalPlayer
+        workspace.CurrentCamera:remove()
+        wait(.1)
+        workspace.CurrentCamera.CameraSubject = speaker.Character:FindFirstChildWhichIsA('Humanoid')
+        workspace.CurrentCamera.CameraType = "Custom"
+        speaker.CameraMinZoomDistance = 0.5
+        speaker.CameraMaxZoomDistance = 400
+        speaker.CameraMode = "Classic"
+        speaker.Character.Head.Anchored = false
+        
+        task.wait(0)
+
+        local function GetGitSound(GithubSnd, SoundName) --idk what is this for anyway
+            local url = GithubSnd
+            if not isfile(SoundName..".mp3") then
+                writefile(SoundName..".mp3", game:HttpGet(url))
+            end
+            local sound = Instance.new("Sound")
+            sound.SoundId = (getcustomasset or getsynasset)(SoundName..".mp3")
+            return sound
+        end
+
+        -- Play sound effect
+        local Clock = GetGitSound("https://github.com/Kenjihin69/Kenjihin69/blob/main/Screen_Recording_20250115_063749.mp3?raw=true", "shinji scream")
+        Clock.Parent = workspace
+        Clock.Volume = 7
+        Clock.TimePosition = 0
+        Clock:Play()
+
+        task.wait(1)
+        local AnimAnim2 = Instance.new("Animation")
+
+        AnimAnim2.AnimationId = "rbxassetid://140164642047188"
+
+        local Anim2 = Humanoid:LoadAnimation(AnimAnim2)
+
+
+        local startTime = 6.8
+
+        Anim:Stop()
+
+        Anim2:Play()
+
+        Anim2:AdjustSpeed(0)
+
+        Anim2.TimePosition = startTime
+
+        Anim2:AdjustSpeed(0.6)
+        
+        task.wait(0)
+        -- Get the player's camera
+        local player = game.Players.LocalPlayer
+        local camera = game.Workspace.CurrentCamera
+
+        -- Set the camera's CameraType to Scriptable (this "freezes" the camera)
+        camera.CameraType = Enum.CameraType.Scriptable
+
+        -- Get the player's position
+        local playerPosition = player.Character.HumanoidRootPart.Position
+
+        -- Set the camera's position above the player (e.g., 50 units above)
+        local freezePosition = playerPosition + Vector3.new(-5, 1, -5) -- x, y, z coordinates, y is higher than player's position
+
+        -- Set the camera's CFrame (position + orientation)
+        camera.CFrame = CFrame.new(freezePosition)
+
+        -- Optional: Make the camera look at the player (or another point if desired)
+        camera.CFrame = CFrame.new(freezePosition, playerPosition)
+        task.wait(0)
+        
+        -- Clone and apply particle effects to HumanoidRootPart again
+        local Test = game.ReplicatedStorage.Emotes.DemonParticles.RootAttachment
+        local test = Test:Clone()
+        test.Parent = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart")
+
+        for _, child in ipairs(test:GetChildren()) do
+            if child:IsA("ParticleEmitter") then
+                child.Color = ColorSequence.new(Color3.fromRGB(128, 0, 128)) -- Set color to purple
+                child:Emit(1)
+            end
+        end
+        
+        task.wait(1.6)
+        
+        -- Clone and apply particle effects for Explode
+        local Test = game.ReplicatedStorage.Resources.Sunrise.FinalFX.Explode.Attachment
+        local test = Test:Clone()
+        test.Parent = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart")
+
+        for _, child in ipairs(test:GetChildren()) do
+            if child:IsA("ParticleEmitter") then
+                child.Color = ColorSequence.new(Color3.fromRGB(128, 0, 128)) -- Set color to purple
+                child:Emit(10)
+            end
+        end
+        
+        task.wait(0)
+        
+        -- Clone and apply particle effects for KJEffects
+        local Test = game.ReplicatedStorage.Resources.KJEffects.lastkick.Attachment
+        local test = Test:Clone()
+        test.Parent = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart")
+
+        for _, child in ipairs(test:GetChildren()) do
+            if child:IsA("ParticleEmitter") then
+                child:Emit(15)
+            end
+        end
+        
+        task.wait(0)
+        
+        -- Stop sound effect
+        Clock:Stop()    
+        
+        task.wait(0.6)
+        
+        -- Reset the camera settings back to normal
+        Players = game:GetService("Players")
+        local speaker = Players.LocalPlayer
+        workspace.CurrentCamera:remove()
+        wait(.1)
+        workspace.CurrentCamera.CameraSubject = speaker.Character:FindFirstChildWhichIsA('Humanoid')
+        workspace.CurrentCamera.CameraType = "Custom"
+        speaker.CameraMinZoomDistance = 0.5
+        speaker.CameraMaxZoomDistance = 400
+        speaker.CameraMode = "Classic"
+        speaker.Character.Head.Anchored = false
+
+    end
+end
+
+humanoid.AnimationPlayed:Connect(onAnimationPlayed)
+
+local animationId = 11365563255 --- two ult
+
+local player = game.Players.LocalPlayer
+
+local character = player.Character or player.CharacterAdded:Wait()
+
+local humanoid = character:WaitForChild("Humanoid")
+
+
+local function onAnimationPlayed(animationTrack)
+
+    if animationTrack.Animation.AnimationId == "rbxassetid://" .. animationId then
+
+        local p = game.Players.LocalPlayer
+        local Humanoid = p.Character:WaitForChild("Humanoid")
+
+
+        for _, animTrack in pairs(Humanoid:GetPlayingAnimationTracks()) do
+            animTrack:Stop()
+        end
+
+
+        local AnimAnim = Instance.new("Animation")
+
+        AnimAnim.AnimationId = "rbxassetid://128022763591042"
+
+        local Anim = Humanoid:LoadAnimation(AnimAnim)
+
+
+        local startTime = 0.6
+
+
+        Anim:Play()
+
+        Anim:AdjustSpeed(0)
+
+        Anim.TimePosition = startTime
+
+        Anim:AdjustSpeed(1)
+
+        local fx7 = game.ReplicatedStorage.Resources.FiveSeasonsFX["CharFX"].EyeEmit:Clone()
+        fx7.Parent = game.Players.LocalPlayer.Character["Head"]
+        for _, child in ipairs(fx7:GetChildren()) do
+            if child:IsA("ParticleEmitter") then
+                child.Color = ColorSequence.new(Color3.fromRGB(128, 0, 128)) -- Set color to purple
+                child:Emit(6) -- Emit 6 particles
+            end
+        end 
+        task.wait(0.4)
+        local AnimAnim2 = Instance.new("Animation")
+
+        AnimAnim2.AnimationId = "rbxassetid://136370737633649"
+
+        local Anim2 = Humanoid:LoadAnimation(AnimAnim2)
+
+
+        local startTime = 4.3
+
+
+        Anim:Stop()
+
+        Anim2:Play()
+
+        Anim2:AdjustSpeed(0)
+
+        Anim2.TimePosition = startTime
+
+        Anim2:AdjustSpeed(0000000000.1)
+
+        local Test = game.ReplicatedStorage.Resources.Sunrise.Constant2.Part.Constant
+
+        local test = Test:Clone()
+        test.Parent = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart")
+
+        for _, child in ipairs(test:GetChildren()) do
+            if child:IsA("ParticleEmitter") then
+                child.Color = ColorSequence.new(Color3.fromRGB(128, 0, 128)) -- Set color to purple
+                child:Emit(20)
+                child.Enabled = true
+            end
+        end
+        task.wait(0.3)
+        -- Get the player's camera
+        local player = game.Players.LocalPlayer
+        local camera = game.Workspace.CurrentCamera
+
+        -- Set the camera's CameraType to Scriptable (this "freezes" the camera)
+        camera.CameraType = Enum.CameraType.Scriptable
+
+        -- Get the player's position
+        local playerPosition = player.Character.HumanoidRootPart.Position
+
+        -- Set the camera's position above the player (e.g., 50 units above)
+        local freezePosition = playerPosition + Vector3.new(50, 70 ,50) -- x, y, z coordinates, y is higher than player's position
+
+        -- Set the camera's CFrame (position + orientation)
+        camera.CFrame = CFrame.new(freezePosition)
+
+        -- Optional: Make the camera look at the player (or another point if desired)
+        camera.CFrame = CFrame.new(freezePosition, playerPosition)
+        task.wait(1)
+        -- best Cframe fly function
+        coroutine.wrap(function()
+            local Players = game:GetService("Players")
+            local player = game.Players.LocalPlayer
+            local RunService = game:GetService("RunService")
+            local Workspace = game:GetService("Workspace")
+            local Camera = Workspace.CurrentCamera
+
+            local character = player.Character or player.CharacterAdded:Wait()
+            local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+            local normalGravity = Workspace.Gravity
+            local spinSpeed = 800
+            local spinDuration = 3
+            local initialRadius = 200
+            local finalRadius = 1
+            local riseHeight = 0
+            local riseDuration = 3
+
+            local function getNearestHumanoid()
+                local nearestHumanoid, shortestDistance
+                for _, descendant in ipairs(Workspace.Live:GetDescendants()) do
+                    if descendant:IsA("Humanoid") and descendant.Parent.Name ~= game.Players.LocalPlayer.Character.Name then
+                        local humanoidRoot = descendant.Parent:FindFirstChild("HumanoidRootPart")
+                        if humanoidRoot then
+                            local distance = (humanoidRootPart.Position - humanoidRoot.Position).Magnitude
+                            if not nearestHumanoid or distance < shortestDistance then
+                                nearestHumanoid, shortestDistance = humanoidRoot, distance
+                            end
+                        end
+                    end
+                end
+                return nearestHumanoid
+            end
+
+            local function spinAndRise()
+                Workspace.Gravity = 0
+
+                local startTime = tick()
+                local originalPosition = humanoidRootPart.Position
+                local nearestHumanoid = getNearestHumanoid()
+
+                while tick() - startTime < spinDuration do
+                    local elapsedTime = tick() - startTime
+                    local angle = math.rad(spinSpeed) * elapsedTime
+                    local progress = elapsedTime / spinDuration
+
+                    local currentRadius = initialRadius + (finalRadius - initialRadius) * progress
+                    local xOffset, zOffset = math.cos(angle) * currentRadius, math.sin(angle) * currentRadius
+                    local riseAmount = math.min(riseHeight * elapsedTime / riseDuration, riseHeight)
+
+                    local newPosition = originalPosition + Vector3.new(xOffset, riseAmount, zOffset)
+                    if nearestHumanoid then
+                        humanoidRootPart.CFrame = CFrame.new(newPosition, nearestHumanoid.Position)
+                    else
+                        humanoidRootPart.Position = newPosition
+                    end
+
+                    RunService.Stepped:Wait()
+                end
+
+                Workspace.Gravity = normalGravity
+            end
+
+            spinAndRise()
+        end)()
+        task.wait(0.5)
+        local AnimAnim2 = Instance.new("Animation")
+
+        AnimAnim2.AnimationId = "rbxassetid://79761806706382"
+
+        local Anim2 = Humanoid:LoadAnimation(AnimAnim2)
+
+
+        local startTime = 0
+
+
+        Anim2:Stop()
+
+        Anim2:Play()
+
+        Anim2:AdjustSpeed(0)
+
+        Anim2.TimePosition = startTime
+
+        Anim2:AdjustSpeed(0.9)
+        task.wait(2.6)
+        -- Get the player's camera
+        local player = game.Players.LocalPlayer
+        local camera = game.Workspace.CurrentCamera
+
+        -- Set the camera's CameraType to Scriptable (this "freezes" the camera)
+        camera.CameraType = Enum.CameraType.Scriptable
+
+        -- Get the player's position
+        local playerPosition = player.Character.HumanoidRootPart.Position
+
+        -- Set the camera's position above the player (e.g., 50 units above)
+        local freezePosition = playerPosition + Vector3.new(-7, 1, -7) -- x, y, z coordinates, y is higher than player's position
+
+        -- Set the camera's CFrame (position + orientation)
+        camera.CFrame = CFrame.new(freezePosition)
+
+        -- Optional: Make the camera look at the player (or another point if desired)
+        camera.CFrame = CFrame.new(freezePosition, playerPosition)
+        task.wait(0)
+        test:Destroy()
+        task.wait(0)
+        local fx7 = game.ReplicatedStorage.Resources.FiveSeasonsFX["CharFX"].EyeEmit:Clone()
+        fx7.Parent = game.Players.LocalPlayer.Character["Right Arm"]
+        for _, child in ipairs(fx7:GetChildren()) do
+            if child:IsA("ParticleEmitter") then
+                child.Color = ColorSequence.new(Color3.fromRGB(128, 0, 128)) -- Set color to purple
+                child:Emit(6) -- Emit 6 particles
+            end
+        end 
+        task.wait(1)
+        local Test = game.ReplicatedStorage.Resources.GrandFissureFinisher.DragonExplode.Part.Main
+        local test = Test:Clone()
+        test.Parent = game.Players.LocalPlayer.Character["HumanoidRootPart"]
+
+
+        for _, child in ipairs(test:GetChildren()) do
+            if child:IsA("ParticleEmitter") then
+                child.Color = ColorSequence.new(Color3.fromRGB(128, 0, 128)) -- Set color to purple
+                child:Emit(20)
+            end
+        end
+        task.wait(0)
+        Players = game:GetService("Players")
+        local speaker = Players.LocalPlayer
+        workspace.CurrentCamera:remove()
+        wait(.1)
+        workspace.CurrentCamera.CameraSubject = speaker.Character:FindFirstChildWhichIsA('Humanoid')
+        workspace.CurrentCamera.CameraType = "Custom"
+        speaker.CameraMinZoomDistance = 0.5
+        speaker.CameraMaxZoomDistance = 400
+        speaker.CameraMode = "Classic"
+        speaker.Character.Head.Anchored = false
+    end
+
+end
+
+humanoid.AnimationPlayed:Connect(onAnimationPlayed)
 
 local player = game.Players.LocalPlayer
 local backpack = player:WaitForChild("Backpack")
